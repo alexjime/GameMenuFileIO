@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Generic version of the LinkedList class.
  * @param <U> the type of the value being boxed
@@ -49,5 +53,15 @@ class LinkedList<U> {
             }
         }
         System.out.println("==================");
+    }
+
+    public void save(String fileName) throws IOException {
+        BufferedWriter out = new BufferedWriter(
+                new FileWriter(fileName));
+        for (Node<U> n = head.next; n != null; n = n.next) {
+            DataUtil.populate(n.data, out);
+        }
+        out.close();
+        System.out.println("저장이 완료되었습니다.");
     }
 }
